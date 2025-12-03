@@ -23,6 +23,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   DateTime initialDate = DateTime.now();
   bool _isDatePickerVisible = false;
 
+  bool _isPartTwo = false;
+
   @override
   void initState() {
     super.initState();
@@ -33,7 +35,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     });
 
     _emailController.addListener(() {
-      // print(_emailController.text);
       setState(() {
         _email = _emailController.text;
       });
@@ -58,15 +59,33 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   //   );
   // }
   bool get _isButtonEnabled {
-    return _isNameValid() && _isEmailValid(); // && _isEmailValid() == null;
+    return _isNameValid() &&
+        _isEmailValid() &&
+        _isBirthdayValid(); // && _isEmailValid() == null;
   }
 
-  void _onNextTap() {
+  // void _onNextTap() {
+  //   if (!_isButtonEnabled) return;
+
+  //   Navigator.of(context).push(
+  //     MaterialPageRoute(builder: (context) => CustomizeExperienceScreen()),
+  //   );
+  // }
+  Future<void> _onNextTap() async {
     if (!_isButtonEnabled) return;
 
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => CustomizeExperienceScreen()),
+    final result = await Navigator.of(context).push<bool>(
+      MaterialPageRoute(
+        builder: (context) => const CustomizeExperienceScreen(),
+      ),
     );
+
+    if (result == true && mounted) {
+      setState(() {
+        _isPartTwo = true; // ← 두 번째 단계로 진입
+        _isDatePickerVisible = false;
+      });
+    }
   }
 
   // String? _isEmailValid() {
@@ -90,6 +109,10 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     // setState(() {});
   }
 
+  bool _isBirthdayValid() {
+    return _birthdayController.text.isNotEmpty;
+  }
+
   void _setTextFieldDate(DateTime date) {
     final textDate = date.toString().split(" ").first;
     _birthdayController.value = TextEditingValue(text: textDate);
@@ -100,6 +123,10 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     setState(() {
       _isDatePickerVisible = !_isDatePickerVisible;
     });
+  }
+
+  void _onSignUpTap() {
+    print("🎉 SIGN UP COMPLETE!");
   }
 
   @override
@@ -124,22 +151,34 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               controller: _nameController,
               autocorrect: false,
               decoration: InputDecoration(
-                suffix: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    GestureDetector(
-                      // onTap: _nameTextTap,
-                      child: // FaIcon(FontAwesomeIcons.solidCircleCheck),
-                      FaIcon(
-                        _isNameValid()
-                            ? FontAwesomeIcons.solidCircleCheck
-                            : null,
-                        color: Colors.green.shade500,
-                        size: Sizes.size20,
-                      ),
-                    ),
-                  ],
-                ),
+                // suffix: Row(
+                //   mainAxisSize: MainAxisSize.min,
+                //   children: [
+                //     GestureDetector(
+                //       // onTap: _nameTextTap,
+                //       child: // FaIcon(FontAwesomeIcons.solidCircleCheck),
+                //       FaIcon(
+                //         _isNameValid()
+                //             ? FontAwesomeIcons.solidCircleCheck
+                //             : null,
+                //         color: Colors.green.shade500,
+                //         size: Sizes.size20,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                suffix: _isNameValid()
+                    ? GestureDetector(
+                        onTap: () {
+                          _nameController.clear();
+                        },
+                        child: FaIcon(
+                          FontAwesomeIcons.solidCircleCheck,
+                          color: Colors.green.shade500,
+                          size: Sizes.size20,
+                        ),
+                      )
+                    : const SizedBox.shrink(),
                 hintText: "Name",
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.grey.shade400),
@@ -157,22 +196,34 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               // onEditingComplete: _onSubmit,
               autocorrect: false,
               decoration: InputDecoration(
-                suffix: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    GestureDetector(
-                      // onTap: _nameTextTap,
-                      child: // FaIcon(FontAwesomeIcons.solidCircleCheck),
-                      FaIcon(
-                        _isEmailValid()
-                            ? FontAwesomeIcons.solidCircleCheck
-                            : null,
-                        color: Colors.green.shade500,
-                        size: Sizes.size20,
-                      ),
-                    ),
-                  ],
-                ),
+                // suffix: Row(
+                //   mainAxisSize: MainAxisSize.min,
+                //   children: [
+                //     GestureDetector(
+                //       // onTap: _nameTextTap,
+                //       child: // FaIcon(FontAwesomeIcons.solidCircleCheck),
+                //       FaIcon(
+                //         _isEmailValid()
+                //             ? FontAwesomeIcons.solidCircleCheck
+                //             : null,
+                //         color: Colors.green.shade500,
+                //         size: Sizes.size20,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                suffix: _isEmailValid()
+                    ? GestureDetector(
+                        onTap: () {
+                          _emailController.clear();
+                        },
+                        child: FaIcon(
+                          FontAwesomeIcons.solidCircleCheck,
+                          color: Colors.green.shade500,
+                          size: Sizes.size20,
+                        ),
+                      )
+                    : const SizedBox.shrink(),
 
                 hintText: "Email",
 
@@ -261,74 +312,94 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
           ],
         ),
       ),
-      // bottomNavigationBar: BottomAppBar(
-      //   height: 300,
-      //   child: SizedBox(
-      //     child: CupertinoDatePicker(
-      //       maximumDate: initialDate,
-      //       initialDateTime: initialDate,
-      //       mode: CupertinoDatePickerMode.date,
-      //       onDateTimeChanged: _setTextFieldDate,
-      //     ),
-      //   ),
-      // ),
-      bottomNavigationBar: SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // 🔹 Next Button (항상 있음)
-            // Padding(
-            //   padding: const EdgeInsets.only(right: 24, bottom: 10),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.end,
-            //     children: [
-            //       TextButton(
-            //         onPressed: null,
-            //         style: TextButton.styleFrom(
-            //           padding: const EdgeInsets.symmetric(
-            //             horizontal: 24,
-            //             vertical: 12,
-            //           ),
-            //           backgroundColor: Colors.grey.shade300,
-            //           foregroundColor: Colors.white,
-            //           shape: const StadiumBorder(),
-            //         ),
-            //         child: const Text(
-            //           "Next",
-            //           style: TextStyle(fontWeight: FontWeight.w600),
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            // GestureDetector(
-            //   onTap: _onNextTap,
-            //   child: FormButton(disabled: false),
-            // ),
-            GestureDetector(
-              onTap: _isButtonEnabled ? _onNextTap : null,
-              behavior: HitTestBehavior.translucent,
-              child: FormButton(disabled: !_isButtonEnabled),
-            ),
 
-            // 🔹 DatePicker (펼침/접힘)
-            AnimatedCrossFade(
-              duration: const Duration(milliseconds: 250),
-              crossFadeState: _isDatePickerVisible
-                  ? CrossFadeState.showSecond
-                  : CrossFadeState.showFirst,
-              firstChild: const SizedBox.shrink(),
-              secondChild: SizedBox(
-                height: 200,
-                child: CupertinoDatePicker(
-                  maximumDate: initialDate,
-                  initialDateTime: initialDate,
-                  mode: CupertinoDatePickerMode.date,
-                  onDateTimeChanged: _setTextFieldDate,
+      //       bottomNavigationBar: SafeArea(
+      //         child: SizedBox(
+      //           width: double.infinity, // ✅ 전체 폭을 확실히 줌
+      //           child: Column(
+      //             mainAxisSize: MainAxisSize.min,
+      //             children: [
+      //               // 1) Next / Sign up 버튼
+      //               GestureDetector(
+      //                 onTap: _isPartTwo
+      //                     ? _onSignUpTap
+      //                     : (_isButtonEnabled ? _onNextTap : null),
+      //                 behavior: HitTestBehavior.translucent,
+      //                 child: FormButton(
+      //                   disabled: _isPartTwo ? false : !_isButtonEnabled,
+      //                 ),
+      //               ),
+
+      //               // 2) DatePicker (펼침/접힘)
+      //               AnimatedCrossFade(
+      //                 duration: const Duration(milliseconds: 250),
+      //                 crossFadeState: _isDatePickerVisible
+      //                     ? CrossFadeState.showSecond
+      //                     : CrossFadeState.showFirst,
+      //                 firstChild: const SizedBox.shrink(),
+      //                 secondChild: SizedBox(
+      //                   height: 200,
+      //                   width: double.infinity, // ✅ 여기서도 폭을 확실히 줌
+      //                   child: CupertinoDatePicker(
+      //                     maximumDate: initialDate,
+      //                     initialDateTime: initialDate,
+      //                     mode: CupertinoDatePickerMode.date,
+      //                     onDateTimeChanged: _setTextFieldDate,
+      //                   ),
+      //                 ),
+      //               ),
+      //             ],
+      //           ),
+      //         ),
+      //       ),
+      //     );
+      //   }
+      // }
+      bottomNavigationBar: SafeArea(
+        child: SizedBox(
+          width: double.infinity,
+          child: _isPartTwo
+              // 🔹 Part 2 : Sign up 버튼만
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 16,
+                  ),
+                  child: GestureDetector(
+                    onTap: _onSignUpTap,
+                    behavior: HitTestBehavior.translucent,
+                    child: FormButton(disabled: false), // 안에 "Sign up" 표시
+                  ),
+                )
+              // 🔹 Part 1 : Next 버튼 + DatePicker
+              : Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    GestureDetector(
+                      onTap: _isButtonEnabled ? _onNextTap : null,
+                      behavior: HitTestBehavior.translucent,
+                      child: FormButton(disabled: !_isButtonEnabled),
+                    ),
+                    // 🔹 AnimatedSize + 조건부 DatePicker
+                    AnimatedSize(
+                      duration: const Duration(milliseconds: 250),
+                      curve: Curves.easeInOut,
+                      // vsync: this,
+                      child: _isDatePickerVisible
+                          ? SizedBox(
+                              height: 200,
+                              width: double.infinity,
+                              child: CupertinoDatePicker(
+                                maximumDate: initialDate,
+                                initialDateTime: initialDate,
+                                mode: CupertinoDatePickerMode.date,
+                                onDateTimeChanged: _setTextFieldDate,
+                              ),
+                            )
+                          : const SizedBox.shrink(),
+                    ),
+                  ],
                 ),
-              ),
-            ),
-          ],
         ),
       ),
     );
