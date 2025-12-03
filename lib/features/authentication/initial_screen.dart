@@ -23,7 +23,7 @@ class InitialScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: Sizes.size40),
           child: Column(
             children: [
-              Gaps.v96,
+              Gaps.v60,
               Gaps.v80,
               Text(
                 "See what's happening in the world right now.",
@@ -33,7 +33,7 @@ class InitialScreen extends StatelessWidget {
                 ),
               ),
 
-              Gaps.v96,
+              Gaps.v60,
               Gaps.v80,
 
               AuthButton(
@@ -106,7 +106,7 @@ class InitialScreen extends StatelessWidget {
                       color: Theme.of(context).primaryColor,
                     ),
                   ),
-                  Text(', and'),
+                  Text(', and '),
                   Text(
                     'Cookie Use',
                     style: TextStyle(
@@ -114,7 +114,7 @@ class InitialScreen extends StatelessWidget {
                       color: Theme.of(context).primaryColor,
                     ),
                   ),
-                  Text(','),
+                  Text('.'),
                 ],
               ),
               // RichText(
