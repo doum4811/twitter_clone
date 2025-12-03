@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:twitter_clone/constants/sizes.dart';
-import 'package:twitter_clone/features/authentication/sign_up_screen.dart';
+import 'package:twitter_clone/features/authentication/initial_screen.dart';
 
 void main() {
   runApp(const TwitterApp());
@@ -16,8 +16,9 @@ class TwitterApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: false,
         scaffoldBackgroundColor: Colors.white,
-        primaryColor: Color(0xFFE9435A),
+        primaryColor: Color(0xFF4693db),
         appBarTheme: AppBarTheme(
+          centerTitle: true,
           foregroundColor: Colors.black,
           backgroundColor: Colors.white,
           elevation: 0,
@@ -26,9 +27,13 @@ class TwitterApp extends StatelessWidget {
             fontSize: Sizes.size16 + Sizes.size2,
             fontWeight: FontWeight.w600,
           ),
+          iconTheme: IconThemeData(
+            size: Sizes.size32,
+            color: Color(0xFF4693db),
+          ),
         ),
       ),
-      home: SignUpScreen(),
+      home: InitialScreen(),
     );
   }
 }
