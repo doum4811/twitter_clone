@@ -2,11 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter_clone/constants/gaps.dart';
 import 'package:twitter_clone/constants/sizes.dart';
+import 'package:twitter_clone/features/authentication/create_account_screen.dart';
 import 'package:twitter_clone/features/authentication/widgets/auth_button.dart';
 
 class InitialScreen extends StatelessWidget {
   const InitialScreen({super.key});
-  //By signing up, you agree to our Terms, Privacy Policy, and Cookie Use.
+
+  void _onCreateAccountTap(BuildContext context) {
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (context) => CreateAccountScreen()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +76,10 @@ class InitialScreen extends StatelessWidget {
               ),
               Gaps.v4,
 
-              AuthButton(icon: null, text: "Create account"),
+              GestureDetector(
+                onTap: () => _onCreateAccountTap(context),
+                child: AuthButton(icon: null, text: "Create account"),
+              ),
               Gaps.v20,
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -161,7 +171,7 @@ class InitialScreen extends StatelessWidget {
 
               // Gaps.h5,
               GestureDetector(
-                // onTap: () => _onLoginTap(context),
+                // onTap: () => _onCreateAccountTap(context),
                 child: Text(
                   'Log in',
                   style: TextStyle(
