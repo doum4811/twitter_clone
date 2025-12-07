@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter_clone/constants/gaps.dart';
+import 'package:twitter_clone/features/authentication/password_screen.dart';
 
 class ConfirmationCodeScreen extends StatefulWidget {
   const ConfirmationCodeScreen({super.key});
@@ -10,6 +11,19 @@ class ConfirmationCodeScreen extends StatefulWidget {
 }
 
 class _ConfirmationCodeScreenState extends State<ConfirmationCodeScreen> {
+  void _onNaxtTap() {
+    // print("🎉 SIGN UP COMPLETE!");
+    // MaterialPageRoute(builder: (context) => ConfirmationCodeScreen());
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PasswordScreen(),
+
+        // ConfirmationCodeScreen(email: _formData["email"]),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,6 +90,7 @@ class _ConfirmationCodeScreenState extends State<ConfirmationCodeScreen> {
         child: GestureDetector(
           // behavior: HitTestBehavior.translucent,
           // onTap: _trackingEnabled ? _onNextTap : null,
+          onTap: _onNaxtTap,
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 24),
             height: 48,

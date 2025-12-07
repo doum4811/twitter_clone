@@ -33,6 +33,7 @@ class TwitterApp extends StatelessWidget {
           ),
         ),
       ),
+      // home: InitialScreen(),
       home: InitialScreen(),
     );
   }
