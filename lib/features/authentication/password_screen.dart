@@ -12,9 +12,9 @@ class PasswordScreen extends StatefulWidget {
 }
 
 class _PasswordScreenState extends State<PasswordScreen> {
-  // final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
-  final String _password = "";
+  String _password = "";
 
   bool _obscureText = true;
 
@@ -22,21 +22,21 @@ class _PasswordScreenState extends State<PasswordScreen> {
   void initState() {
     super.initState();
 
-    // _passwordController.addListener(() {
-    //   setState(() {
-    //     _password = _passwordController.text;
-    //   });
-    // });
+    _passwordController.addListener(() {
+      setState(() {
+        _password = _passwordController.text;
+      });
+    });
   }
 
   @override
   void dispose() {
-    // _passwordController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
   bool _isPasswordValid() {
-    return _password.isNotEmpty && _password.length > 8;
+    return _password.isNotEmpty && _password.length >= 8;
   }
 
   void _onSubmit() {
@@ -56,8 +56,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
     setState(() {});
   }
 
-  void _onNaxtTap() {
-    // print("🎉 SIGN UP COMPLETE!");
+  void _onNextTap() {
     // MaterialPageRoute(builder: (context) => ConfirmationCodeScreen());
     Navigator.push(
       context,
@@ -89,7 +88,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
               const SizedBox(height: 16),
               // OtpCodeInput(controllers: _controllers),
               TextField(
-                // controller: _passwordController,
+                controller: _passwordController,
                 onEditingComplete: _onSubmit,
                 obscureText: _obscureText,
                 autocorrect: false,
@@ -106,14 +105,25 @@ class _PasswordScreenState extends State<PasswordScreen> {
                       //   ),
                       // ),
                       // Gaps.h16,
-                      FaIcon(
-                        FontAwesomeIcons.eyeSlash,
-                        // _obscureText
-                        //     ? FontAwesomeIcons.eye
-                        //     : FontAwesomeIcons.eyeSlash,
-                        color: Colors.grey.shade500,
-                        size: Sizes.size20,
+                      GestureDetector(
+                        onTap: _toggleObscureText,
+                        child: FaIcon(
+                          // FontAwesomeIcons.eyeSlash,
+                          _obscureText
+                              ? FontAwesomeIcons.eyeSlash
+                              : FontAwesomeIcons.eye,
+                          color: Colors.grey.shade500,
+                          size: Sizes.size20,
+                        ),
                       ),
+                      if (_isPasswordValid()) ...[
+                        Gaps.h16,
+                        FaIcon(
+                          FontAwesomeIcons.solidCircleCheck,
+                          color: Colors.green.shade500,
+                          size: Sizes.size20,
+                        ),
+                      ],
                     ],
                   ),
                   hintText: "Password",
@@ -128,19 +138,6 @@ class _PasswordScreenState extends State<PasswordScreen> {
               ),
 
               Gaps.v24,
-
-              // const Text(
-              //   "Didn't receive email?",
-              //   style: TextStyle(fontSize: 14, color: Colors.blue),
-              // ),
-              // Gaps.v24,
-              // AuthButton(
-              //   onTap: _valid ? goToPasswordScreen : verifyOtp,
-              //   payload: _valid ? "Next" : "Verify",
-              //   isDark: true,
-              //   active: isOtpFilled(),
-              //   isLoading: _verifying,
-              // ),
             ],
           ),
         ),
@@ -150,17 +147,18 @@ class _PasswordScreenState extends State<PasswordScreen> {
         child: GestureDetector(
           // behavior: HitTestBehavior.translucent,
           // onTap: _trackingEnabled ? _onNextTap : null,
-          onTap: _onNaxtTap,
+          onTap: _isPasswordValid() ? _onNextTap : null,
+          // onTap: _onNaxtTap,
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 24),
             height: 48,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              // color: _trackingEnabled
-              // ? Colors
-              //       .black //Theme.of(context).primaryColor
-              // : Colors.grey.shade400,
-              color: Colors.black,
+              color: _isPasswordValid()
+                  ? Colors
+                        .black //Theme.of(context).primaryColor
+                  : Colors.grey.shade400,
+              // color: Colors.black,
               borderRadius: BorderRadius.circular(28),
             ),
             child: Text(
@@ -168,8 +166,9 @@ class _PasswordScreenState extends State<PasswordScreen> {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w800,
-                color: Colors.white,
+                // color: Colors.white,
                 // color: _trackingEnabled ? Colors.white : Colors.black38,
+                color: _isPasswordValid() ? Colors.white : Colors.black38,
               ),
             ),
           ),
