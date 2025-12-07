@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter_clone/constants/gaps.dart';
 import 'package:twitter_clone/constants/sizes.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:twitter_clone/features/authentication/confirmation_code_screen.dart';
 import 'package:twitter_clone/features/authentication/customize_experience_screen.dart';
 import 'package:twitter_clone/features/authentication/widgets/form_button.dart';
 
@@ -126,7 +127,16 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   }
 
   void _onSignUpTap() {
-    print("🎉 SIGN UP COMPLETE!");
+    // print("🎉 SIGN UP COMPLETE!");
+    // MaterialPageRoute(builder: (context) => ConfirmationCodeScreen());
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ConfirmationCodeScreen(),
+
+        // ConfirmationCodeScreen(email: _formData["email"]),
+      ),
+    );
   }
 
   @override
