@@ -12,9 +12,9 @@ class PasswordScreen extends StatefulWidget {
 }
 
 class _PasswordScreenState extends State<PasswordScreen> {
-  final TextEditingController _passwordController = TextEditingController();
+  // final TextEditingController _passwordController = TextEditingController();
 
-  String _password = "";
+  final String _password = "";
 
   bool _obscureText = true;
 
@@ -22,30 +22,30 @@ class _PasswordScreenState extends State<PasswordScreen> {
   void initState() {
     super.initState();
 
-    _passwordController.addListener(() {
-      setState(() {
-        _password = _passwordController.text;
-      });
-    });
+    // _passwordController.addListener(() {
+    //   setState(() {
+    //     _password = _passwordController.text;
+    //   });
+    // });
   }
 
   @override
   void dispose() {
-    _passwordController.dispose();
+    // _passwordController.dispose();
     super.dispose();
   }
 
-  // bool _isPasswordValid() {
-  //   return _password.isNotEmpty && _password.length > 8;
-  // }
+  bool _isPasswordValid() {
+    return _password.isNotEmpty && _password.length > 8;
+  }
 
-  // void _onSubmit() {
-  //   if (!_isPasswordValid()) return;
-  //   Navigator.push(
-  //     context,
-  //     MaterialPageRoute(builder: (context) => BirthdayScreen()),
-  //   );
-  // }
+  void _onSubmit() {
+    if (!_isPasswordValid()) return;
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => BirthdayScreen()),
+    // );
+  }
 
   // void _onClearTap() {
   //   _passwordController.clear();
@@ -89,8 +89,8 @@ class _PasswordScreenState extends State<PasswordScreen> {
               const SizedBox(height: 16),
               // OtpCodeInput(controllers: _controllers),
               TextField(
-                controller: _passwordController,
-                // onEditingComplete: _onSubmit,
+                // controller: _passwordController,
+                onEditingComplete: _onSubmit,
                 obscureText: _obscureText,
                 autocorrect: false,
                 decoration: InputDecoration(
@@ -106,19 +106,17 @@ class _PasswordScreenState extends State<PasswordScreen> {
                       //   ),
                       // ),
                       // Gaps.h16,
-                      GestureDetector(
-                        onTap: _toggleObscureText,
-                        child: FaIcon(
-                          _obscureText
-                              ? FontAwesomeIcons.eye
-                              : FontAwesomeIcons.eyeSlash,
-                          color: Colors.grey.shade500,
-                          size: Sizes.size20,
-                        ),
+                      FaIcon(
+                        FontAwesomeIcons.eyeSlash,
+                        // _obscureText
+                        //     ? FontAwesomeIcons.eye
+                        //     : FontAwesomeIcons.eyeSlash,
+                        color: Colors.grey.shade500,
+                        size: Sizes.size20,
                       ),
                     ],
                   ),
-                  hintText: "Make it strong!",
+                  hintText: "Password",
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey.shade400),
                   ),
