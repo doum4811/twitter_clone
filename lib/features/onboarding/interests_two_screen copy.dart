@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter_clone/constants/gaps.dart';
 import 'package:twitter_clone/constants/sizes.dart';
 import 'package:twitter_clone/features/authentication/password_screen.dart';
-import 'package:twitter_clone/features/onboarding/widgets/interest_button.dart';
+import 'package:twitter_clone/features/onboarding/widgets/interest_row.dart';
 
 const musics = [
   "Rap",
@@ -15,7 +15,7 @@ const musics = [
   "EDM",
   "Music news",
   "Hip hop",
-  "Reggae",
+  // "Reggae",
 ];
 
 const entertainments = [
@@ -39,6 +39,16 @@ class InterestsTwoScreen extends StatefulWidget {
 }
 
 class _InterestsTwoScreenState extends State<InterestsTwoScreen> {
+  List<List<String>> _chunk(List<String> list, int size) {
+    List<List<String>> chunks = [];
+    for (int i = 0; i < list.length; i += size) {
+      chunks.add(
+        list.sublist(i, i + size > list.length ? list.length : i + size),
+      );
+    }
+    return chunks;
+  }
+
   void _onNaxtTap() {
     // print("🎉 SIGN UP COMPLETE!");
     // MaterialPageRoute(builder: (context) => InterestsTwoScreen());
@@ -83,11 +93,44 @@ class _InterestsTwoScreenState extends State<InterestsTwoScreen> {
                 ),
               ),
               Gaps.v24,
-              Wrap(
-                runSpacing: 5,
-                spacing: 10,
+
+              // Wrap(
+              //   runSpacing: 5,
+              //   spacing: 10,
+              //   children: [
+              //     for (var music in musics) InterestButton(interest: music),
+              //   ],
+              // ),
+              // SizedBox(
+              //   height: 48,
+              //   child: ListView.separated(
+              //     scrollDirection: Axis.horizontal,
+              //     padding: EdgeInsets.zero,
+              //     itemCount: musics.length,
+              //     itemBuilder: (context, index) {
+              //       final music = musics[index];
+              //       return InterestButton(interest: music);
+              //     },
+              //     separatorBuilder: (context, index) =>
+              //         const SizedBox(width: 10),
+              //   ),
+              // ),
+              // Column(
+              //   children: [
+              //     InterestRow(musics.sublist(0, 3)),
+              //     Gaps.v3,
+              //     InterestRow(musics.sublist(3, 6)),
+
+              //     Gaps.v3,
+              //     InterestRow(musics.sublist(6, 10)),
+              //   ],
+              // ),
+              Column(
                 children: [
-                  for (var music in musics) InterestButton(interest: music),
+                  for (final row in _chunk(musics, 3)) ...[
+                    InterestRow(row),
+                    Gaps.v3,
+                  ],
                 ],
               ),
               Gaps.v24,
@@ -101,12 +144,20 @@ class _InterestsTwoScreenState extends State<InterestsTwoScreen> {
                 ),
               ),
               Gaps.v24,
-              Wrap(
-                runSpacing: 5,
-                spacing: 10,
+              // Wrap(
+              //   runSpacing: 5,
+              //   spacing: 10,
+              //   children: [
+              //     for (var entertainment in entertainments)
+              //       InterestButton(interest: entertainment),
+              //   ],
+              // ),
+              Column(
                 children: [
-                  for (var entertainment in entertainments)
-                    InterestButton(interest: entertainment),
+                  for (final row in _chunk(entertainments, 3)) ...[
+                    InterestRow(row),
+                    Gaps.v3,
+                  ],
                 ],
               ),
               Gaps.v24,
