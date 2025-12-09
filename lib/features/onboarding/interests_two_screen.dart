@@ -167,42 +167,69 @@ class _InterestsTwoScreenState extends State<InterestsTwoScreen> {
         ),
       ),
 
-      bottomNavigationBar: SafeArea(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      bottomNavigationBar: BottomAppBar(
+        elevation: 0,
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border(
+              top: BorderSide(color: Colors.grey.shade300, width: 1),
+            ),
+          ),
+          child: SafeArea(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
-          children: [
-            Text('0 of 3 selected'),
-            GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              // onTap: _trackingEnabled ? _onNextTap : null,
-              onTap: _onNaxtTap,
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 24),
-                width: Sizes.size96,
-
-                height: 48,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  // color: _trackingEnabled
-                  //     ? Colors
-                  //           .black //Theme.of(context).primaryColor
-                  //     : Colors.grey.shade400,
-                  borderRadius: BorderRadius.circular(28),
-                ),
-                child: Text(
-                  "Next",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w800,
-                    // color: _trackingEnabled ? Colors.white : Colors.black38,
-                    color: Colors.white, //: Colors.black38,
+              children: [
+                Padding(
+                  // padding: const EdgeInsets.only(left: 24),
+                  padding: EdgeInsets.symmetric(vertical: 24),
+                  child: Text(
+                    '',
+                    // '${_selectedInterests.length} of 3 selected',
+                    style: const TextStyle(fontSize: 14),
                   ),
                 ),
-              ),
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.only(left: 24),
+                //   child: Text(
+                //     '0 of 3 selected',
+                //     // '${_selectedInterests.length} of 3 selected',
+                //     style: const TextStyle(fontSize: 14),
+                //   ),
+                // ),
+                GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  // onTap: _trackingEnabled ? _onNextTap : null,
+                  onTap: _onNaxtTap,
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 24),
+                    width: Sizes.size96,
+
+                    height: 48,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      // color: _trackingEnabled
+                      //     ? Colors
+                      //           .black //Theme.of(context).primaryColor
+                      //     : Colors.grey.shade400,
+                      borderRadius: BorderRadius.circular(28),
+                    ),
+                    child: Text(
+                      "Next",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w800,
+                        // color: _trackingEnabled ? Colors.white : Colors.black38,
+                        color: Colors.white, //: Colors.black38,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

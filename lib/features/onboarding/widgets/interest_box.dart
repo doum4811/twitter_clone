@@ -1,37 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:twitter_clone/constants/sizes.dart';
 
-class InterestBox extends StatefulWidget {
-  const InterestBox({super.key, required this.interest});
-
+class InterestBox extends StatelessWidget {
   final String interest;
+  final bool isSelected;
+  final VoidCallback onTap;
 
-  @override
-  State<InterestBox> createState() => _InterestBoxState();
-}
-
-class _InterestBoxState extends State<InterestBox> {
-  bool _isSelected = false;
-
-  void _onTap() {
-    setState(() {
-      _isSelected = !_isSelected;
-    });
-  }
+  const InterestBox({
+    super.key,
+    required this.interest,
+    required this.isSelected,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: _onTap,
+      // onTap: _onTap,
+      onTap: onTap,
       child: AnimatedContainer(
         duration: Duration(milliseconds: 300),
+
+        // constraints: const BoxConstraints(minHeight: 90),
         padding: EdgeInsets.symmetric(
-          vertical: Sizes.size32,
+          vertical: Sizes.size20,
           horizontal: Sizes.size24,
         ),
+        alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
-          color: _isSelected ? Theme.of(context).primaryColor : Colors.white,
-          borderRadius: BorderRadius.circular(Sizes.size12),
+          // color: _isSelected ? Theme.of(context).primaryColor : Colors.white,
+          color: isSelected ? Theme.of(context).primaryColor : Colors.white,
+
+          borderRadius: BorderRadius.circular(Sizes.size16),
           border: Border.all(color: Colors.black.withValues(alpha: 0.15)),
           // boxShadow: [
           //   BoxShadow(
@@ -42,10 +42,12 @@ class _InterestBoxState extends State<InterestBox> {
           // ],
         ),
         child: Text(
-          widget.interest,
+          // widget.interest,
+          interest,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: _isSelected ? Colors.white : Colors.black87,
+            // color: _isSelected ? Colors.white : Colors.black87,
+            color: isSelected ? Colors.white : Colors.black87,
           ),
         ),
       ),
