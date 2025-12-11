@@ -42,9 +42,36 @@ class PostCard extends StatelessWidget {
           // 왼쪽 아바타 + 세로 라인
           Column(
             children: [
-              CircleAvatar(
-                radius: 18,
-                backgroundImage: NetworkImage(post.avatarUrl),
+              Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  CircleAvatar(
+                    radius: 18,
+                    backgroundImage: NetworkImage(post.avatarUrl),
+                  ),
+
+                  Positioned(
+                    left: 17,
+                    top: 17,
+                    child: Container(
+                      height: 25,
+                      width: 25,
+                      padding: const EdgeInsets.all(Sizes.size4),
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.white, width: 2),
+                      ),
+                      child: const Center(
+                        child: FaIcon(
+                          FontAwesomeIcons.plus,
+                          color: Colors.white,
+                          size: 12,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               Gaps.v8,
 
@@ -69,7 +96,18 @@ class PostCard extends StatelessWidget {
                   _PostImages(imageUrls: post.imageUrls),
                 ],
                 Gaps.v8,
-                // _ActionsRow(),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    FaIcon(FontAwesomeIcons.heart, size: Sizes.size20),
+                    Gaps.h16,
+                    FaIcon(FontAwesomeIcons.comment, size: Sizes.size20),
+                    Gaps.h16,
+                    FaIcon(FontAwesomeIcons.retweet, size: Sizes.size20),
+                    Gaps.h16,
+                    FaIcon(FontAwesomeIcons.paperPlane, size: Sizes.size20),
+                  ],
+                ),
                 Gaps.v8,
                 Text(
                   "${post.replies} replies · ${post.likes} likes",
@@ -84,6 +122,27 @@ class PostCard extends StatelessWidget {
   }
 }
 
+// class _PostImages extends StatelessWidget {
+//   final List<String> imageUrls;
+
+//   const _PostImages({required this.imageUrls});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return AspectRatio(
+//       // aspectRatio: 4 / 5, // Threads 느낌나는 세로 사진 비율
+//       aspectRatio: 6 / 4,
+//       child: ClipRRect(
+//         borderRadius: BorderRadius.circular(16),
+//         child: PageView(
+//           children: [
+//             for (final url in imageUrls) Image.network(url, fit: BoxFit.cover),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
 class _PostImages extends StatelessWidget {
   final List<String> imageUrls;
 
@@ -91,16 +150,39 @@ class _PostImages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      // aspectRatio: 4 / 5, // Threads 느낌나는 세로 사진 비율
-      aspectRatio: 6 / 4,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(16),
-        child: PageView(
-          children: [
-            for (final url in imageUrls) Image.network(url, fit: BoxFit.cover),
-          ],
+    // 1장일 땐 그냥 한 장짜리 카드
+    if (imageUrls.length == 1) {
+      return AspectRatio(
+        aspectRatio: 6 / 4,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: Image.network(imageUrls.first, fit: BoxFit.cover),
         ),
+      );
+    }
+
+    // 여러 장일 때: 여러 카드가 가로로 스와이프
+    final controller = PageController(
+      viewportFraction: 0.95, // 카드 너비를 화면의 95%로 → 옆 카드가 살짝 보이게
+    );
+
+    return SizedBox(
+      height: 260, // 카드 높이(필요하면 조절)
+      child: PageView.builder(
+        controller: controller,
+        itemCount: imageUrls.length,
+        padEnds: false, // 첫 카드가 왼쪽에 딱 붙도록
+        itemBuilder: (context, index) {
+          final url = imageUrls[index];
+          return Padding(
+            // 카드 사이 간격
+            padding: const EdgeInsets.only(right: 12),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image.network(url, fit: BoxFit.cover),
+            ),
+          );
+        },
       ),
     );
   }

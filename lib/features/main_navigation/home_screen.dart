@@ -82,7 +82,11 @@ const dummyPosts = [
     avatarUrl: "https://picsum.photos/seed/avatar7/80/80",
     isPremium: true,
     content: "Photoshoot with Molly pup.:)",
-    imageUrls: ["https://picsum.photos/200/300?grayscale"],
+    imageUrls: [
+      "https://picsum.photos/210/300?grayscale",
+      "https://picsum.photos/220/300?grayscale",
+      "https://picsum.photos/230/300?grayscale",
+    ],
     time: "7h",
     replies: 53,
     likes: 437,
