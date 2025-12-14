@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:twitter_clone/constants/sizes.dart';
-import 'package:twitter_clone/features/authentication/confirmation_code_screen.dart';
-import 'package:twitter_clone/features/authentication/initial_screen.dart';
 import 'package:twitter_clone/features/main_navigation/home_screen.dart';
 
 void main() {

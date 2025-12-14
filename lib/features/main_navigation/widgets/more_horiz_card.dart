@@ -99,7 +99,7 @@ class _MoreHorizCardState extends State<MoreHorizCard> {
 class _OptionCard extends StatelessWidget {
   final List<Widget> children;
 
-  const _OptionCard({super.key, required this.children});
+  const _OptionCard({required this.children});
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +120,6 @@ class _OptionItem extends StatelessWidget {
   final VoidCallback onTap;
 
   const _OptionItem({
-    super.key,
     required this.label,
     required this.onTap,
     this.isDestructive = false,

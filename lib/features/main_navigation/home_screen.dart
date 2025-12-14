@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:twitter_clone/constants/gaps.dart';
 import 'package:twitter_clone/constants/sizes.dart';
+import 'package:twitter_clone/features/activity/activity_screen.dart';
 import 'package:twitter_clone/features/main_navigation/widgets/nav_tab.dart';
 import 'package:twitter_clone/features/main_navigation/widgets/post_card.dart';
 import 'package:twitter_clone/features/main_navigation/widgets/stf_screen.dart';
 import 'package:twitter_clone/features/main_navigation/write_screen.dart';
+import 'package:twitter_clone/features/searching/search_screen.dart';
 
 // 테스트용 더미 데이터
 const dummyPosts = [
@@ -134,9 +135,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     print('im bulit!');
     return Scaffold(
-      appBar: AppBar(
-        title: FaIcon(FontAwesomeIcons.threads, color: Colors.black),
-      ),
+      // appBar: AppBar(
+      //   title: FaIcon(FontAwesomeIcons.threads, color: Colors.black),
+      // ),
       body: Stack(
         children: [
           Offstage(
@@ -153,9 +154,12 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
           ),
-          Offstage(offstage: _selectedIndex != 1, child: StfScreen()),
+          // Offstage(offstage: _selectedIndex != 1, child: StfScreen()),
+          Offstage(offstage: _selectedIndex != 1, child: SearchScreen()),
+
           Offstage(offstage: _selectedIndex != 2, child: StfScreen()),
-          Offstage(offstage: _selectedIndex != 3, child: StfScreen()),
+          // Offstage(offstage: _selectedIndex != 3, child: StfScreen()),
+          Offstage(offstage: _selectedIndex != 3, child: ActivityScreen()),
           Offstage(offstage: _selectedIndex != 4, child: StfScreen()),
         ],
       ),
