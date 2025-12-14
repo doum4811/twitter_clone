@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter_clone/constants/gaps.dart';
 import 'package:twitter_clone/constants/sizes.dart';
+import 'package:twitter_clone/features/main_navigation/widgets/more_horiz_card.dart';
 
 class Post {
   final String userName;
@@ -193,6 +194,34 @@ class _Header extends StatelessWidget {
 
   const _Header({required this.post});
 
+  void _onHorizTap(BuildContext context) {
+    // if (_videoPlayerController.value.isPlaying) {
+    //   _onTogglePause();
+    // }
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      // barrierColor: Colors.transparent, //Colors.red,
+      barrierColor: Colors.black.withValues(alpha: 0.7),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(Sizes.size14),
+      ), // 이 부분을 추가해야 모서리가 둥그렇게 됨
+      builder: (context) => MoreHorizCard(), //Container()
+    );
+    // print('closed');
+    // _onTogglePause();
+  }
+
+  // void _onHorizTap(BuildContext context) {
+  //   showModalBottomSheet(
+  //     context: context,
+  //     isScrollControlled: true,
+  //     backgroundColor: Colors.transparent, // 바깥은 투명 → 우리가 직접 둥근 박스를 그릴 거라서
+  //     barrierColor: Colors.black.withOpacity(0.4), // 전체 어둡게
+  //     builder: (context) => const MoreHorizCard(),
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -220,7 +249,10 @@ class _Header extends StatelessWidget {
           style: TextStyle(fontSize: Sizes.size12, color: Colors.grey.shade600),
         ),
         const SizedBox(width: Sizes.size4),
-        const Icon(Icons.more_horiz, size: Sizes.size16),
+        GestureDetector(
+          onTap: () => _onHorizTap(context),
+          child: Icon(Icons.more_horiz, size: Sizes.size16),
+        ),
       ],
     );
   }

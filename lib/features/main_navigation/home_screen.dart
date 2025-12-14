@@ -5,6 +5,7 @@ import 'package:twitter_clone/constants/sizes.dart';
 import 'package:twitter_clone/features/main_navigation/widgets/nav_tab.dart';
 import 'package:twitter_clone/features/main_navigation/widgets/post_card.dart';
 import 'package:twitter_clone/features/main_navigation/widgets/stf_screen.dart';
+import 'package:twitter_clone/features/main_navigation/write_screen.dart';
 
 // 테스트용 더미 데이터
 const dummyPosts = [
@@ -111,6 +112,24 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final List<Post> _posts = dummyPosts;
 
+  void _onWriteTap(BuildContext context) async {
+    // if (_videoPlayerController.value.isPlaying) {
+    //   _onTogglePause();
+    // }
+    await showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      barrierColor: Colors.transparent, //Colors.red,
+      //
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(Sizes.size14),
+      ), // 이 부분을 추가해야 모서리가 둥그렇게 됨
+      builder: (context) => WriteScreen(), //Container()
+    );
+    // print('closed');
+    // _onTogglePause();
+  }
+
   @override
   Widget build(BuildContext context) {
     print('im bulit!');
@@ -164,7 +183,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 isSelected: _selectedIndex == 2,
                 icon: FontAwesomeIcons.penToSquare,
                 selectedIcon: FontAwesomeIcons.solidPenToSquare,
-                onTap: () => _onTap(2),
+                // onTap: () => _onTap(2),
+                onTap: () => _onWriteTap(context),
               ),
               NavTab(
                 isSelected: _selectedIndex == 3,
