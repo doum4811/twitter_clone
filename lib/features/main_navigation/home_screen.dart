@@ -7,6 +7,7 @@ import 'package:twitter_clone/features/main_navigation/widgets/post_card.dart';
 import 'package:twitter_clone/features/main_navigation/widgets/stf_screen.dart';
 import 'package:twitter_clone/features/main_navigation/write_screen.dart';
 import 'package:twitter_clone/features/searching/search_screen.dart';
+import 'package:twitter_clone/features/user/user_profile_screen.dart';
 
 // 테스트용 더미 데이터
 const dummyPosts = [
@@ -103,7 +104,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 4;
 
   void _onTap(int index) {
     setState(() {
@@ -158,9 +159,8 @@ class _HomeScreenState extends State<HomeScreen> {
           Offstage(offstage: _selectedIndex != 1, child: SearchScreen()),
 
           Offstage(offstage: _selectedIndex != 2, child: StfScreen()),
-          // Offstage(offstage: _selectedIndex != 3, child: StfScreen()),
           Offstage(offstage: _selectedIndex != 3, child: ActivityScreen()),
-          Offstage(offstage: _selectedIndex != 4, child: StfScreen()),
+          Offstage(offstage: _selectedIndex != 4, child: UserProfileScreen()),
         ],
       ),
       bottomNavigationBar: BottomAppBar(
