@@ -303,10 +303,13 @@
 //     );
 //   }
 // }
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter_clone/constants/gaps.dart';
 import 'package:twitter_clone/constants/sizes.dart';
+import 'package:twitter_clone/features/main_navigation/carmera_screen.dart';
 
 class WriteScreen extends StatefulWidget {
   const WriteScreen({super.key});
@@ -320,6 +323,24 @@ class _WriteScreenState extends State<WriteScreen> {
 
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _textController = TextEditingController();
+
+  File? _attachedImage;
+
+  Future<void> _onAttachmentTap() async {
+    final File? file = await Navigator.of(context).push<File?>(
+      MaterialPageRoute(
+        builder: (context) => const CameraScreen(),
+        fullscreenDialog: true, // iOS 느낌(모달)
+      ),
+    );
+
+    if (file == null) return;
+    setState(() => _attachedImage = file);
+  }
+
+  void _onRemoveAttachedImage() {
+    setState(() => _attachedImage = null);
+  }
 
   @override
   void initState() {
@@ -447,15 +468,58 @@ class _WriteScreenState extends State<WriteScreen> {
 
                           // 클립 아이콘
                           GestureDetector(
-                            onTap: () {
-                              // TODO: 이미지 첨부 로직 넣기
-                            },
+                            // onTap: () {
+                            //   // TODO: 이미지 첨부 로직 넣기
+                            // },
+                            onTap: _onAttachmentTap,
                             child: FaIcon(
                               FontAwesomeIcons.paperclip,
                               size: 18,
                               color: Colors.grey.shade500,
                             ),
                           ),
+
+                          // ✅ 첨부 이미지 미리보기 (WriteScreen에 표시)
+                          if (_attachedImage != null)
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                              ),
+                              child: Stack(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(16),
+                                    child: AspectRatio(
+                                      aspectRatio: 16 / 10,
+                                      child: Image.file(
+                                        _attachedImage!,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    right: 10,
+                                    top: 10,
+                                    child: GestureDetector(
+                                      onTap: _onRemoveAttachedImage,
+                                      child: Container(
+                                        width: 32,
+                                        height: 32,
+                                        decoration: const BoxDecoration(
+                                          color: Colors.black54,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: const Icon(
+                                          Icons.close,
+                                          color: Colors.white,
+                                          size: 18,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                         ],
                       ),
                     ),
