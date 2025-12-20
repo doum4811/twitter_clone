@@ -78,16 +78,57 @@ class _ActivityScreenState extends State<ActivityScreen>
     );
   }
 
-  Widget _tabPill(String text, bool selected) {
+  // Widget _tabPill(String text, bool selected) {
+  //   return SizedBox(
+  //     width: 110, // ✅ 모든 탭 동일한 폭 (100~120 사이 추천)
+  //     child: Container(
+  //       padding: const EdgeInsets.symmetric(vertical: 10),
+  //       decoration: BoxDecoration(
+  //         color: selected ? Colors.black : Colors.white,
+  //         borderRadius: BorderRadius.circular(10),
+  //         border: Border.all(
+  //           color: selected ? Colors.black : Colors.grey.shade300,
+  //           width: 1,
+  //         ),
+  //       ),
+  //       child: Center(
+  //         child: Text(
+  //           text,
+  //           maxLines: 1,
+  //           overflow: TextOverflow.ellipsis, // 안전장치
+  //           style: TextStyle(
+  //             color: selected ? Colors.white : Colors.black,
+  //             fontWeight: FontWeight.w600,
+  //             fontSize: 16,
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+  Widget _tabPill(BuildContext context, String text, bool selected) {
+    final isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
+
+    // 다크모드 기준 팔레트
+    final selectedBg = isDark ? Colors.white : Colors.black;
+    final selectedFg = isDark ? Colors.black : Colors.white;
+
+    final unselectedBg = isDark ? const Color(0xFF1C1C1C) : Colors.white;
+    final unselectedFg = isDark ? Colors.white : Colors.black;
+
+    final borderColor = isDark
+        ? Colors.white.withValues(alpha: 0.18)
+        : Colors.grey.shade300;
+
     return SizedBox(
-      width: 110, // ✅ 모든 탭 동일한 폭 (100~120 사이 추천)
+      width: 110,
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
-          color: selected ? Colors.black : Colors.white,
+          color: selected ? selectedBg : unselectedBg,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: selected ? Colors.black : Colors.grey.shade300,
+            color: selected ? Colors.transparent : borderColor,
             width: 1,
           ),
         ),
@@ -95,9 +136,9 @@ class _ActivityScreenState extends State<ActivityScreen>
           child: Text(
             text,
             maxLines: 1,
-            overflow: TextOverflow.ellipsis, // 안전장치
+            overflow: TextOverflow.ellipsis,
             style: TextStyle(
-              color: selected ? Colors.white : Colors.black,
+              color: selected ? selectedFg : unselectedFg,
               fontWeight: FontWeight.w600,
               fontSize: 16,
             ),
@@ -163,7 +204,7 @@ class _ActivityScreenState extends State<ActivityScreen>
       width: 110,
       height: 36,
       decoration: BoxDecoration(
-        color: Colors.white,
+        // color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.grey.shade300, width: 1),
       ),
@@ -248,7 +289,7 @@ class _ActivityScreenState extends State<ActivityScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
 
       // ✅ AppBar 없이 "상단 큰 타이틀"을 body에 직접 (원본이 이 느낌)
       body: SafeArea(
@@ -263,7 +304,7 @@ class _ActivityScreenState extends State<ActivityScreen>
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.w800,
-                  color: Colors.black,
+                  // color: Colors.black,
                 ),
               ),
             ),
@@ -282,7 +323,8 @@ class _ActivityScreenState extends State<ActivityScreen>
                     labelPadding: const EdgeInsets.symmetric(horizontal: 4),
                     tabs: List.generate(tabs.length, (i) {
                       final selected = _tabController.index == i;
-                      return Tab(child: _tabPill(tabs[i], selected));
+                      // return Tab(child: _tabPill(tabs[i], selected));
+                      return Tab(child: _tabPill(context, tabs[i], selected));
                     }),
                   );
                 },

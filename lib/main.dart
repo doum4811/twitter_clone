@@ -66,9 +66,9 @@ class TwitterApp extends StatelessWidget {
 
         primaryColor: Color(0xFFE9435A),
       ),
-      home: InitialScreen(),
+      // home: InitialScreen(),
       // home: ConfirmationCodeScreen(), // 임시
-      // home: HomeScreen(),
+      home: HomeScreen(),
     );
   }
 }

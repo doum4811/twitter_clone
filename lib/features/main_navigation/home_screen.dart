@@ -173,7 +173,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
+        // color: Colors.white,
         child: Padding(
           padding: EdgeInsets.all(Sizes.size12),
           child: Row(

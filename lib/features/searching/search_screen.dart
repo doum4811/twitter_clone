@@ -68,7 +68,7 @@ class _SearchScreenState extends State<SearchScreen> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.white,
         toolbarHeight: 120, // ✅ 이거 없으면 잘림/오버플로우
         titleSpacing: 0, // ✅ 왼쪽 여백 줄이기(선택)
         title: Padding(
@@ -82,7 +82,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.w800,
-                  color: Colors.black,
+                  // color: Colors.black,
                 ),
               ),
               const SizedBox(height: 10),
@@ -179,7 +179,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       Text(
                         user["name"], //"Mithun",
                         style: TextStyle(
-                          color: Colors.grey.shade600,
+                          // color: Colors.grey.shade600,
                           fontSize: 14,
                         ),
                       ),
@@ -187,7 +187,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       Text(
                         user["followers"], //"26.6K followers",
                         style: TextStyle(
-                          color: Colors.black,
+                          // color: Colors.black,
                           // fontWeight: FontWeight.w600,
                           fontSize: 14,
                           //fontSize: 16
@@ -201,7 +201,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       height: Sizes.size32,
                       decoration: BoxDecoration(
                         shape: BoxShape.rectangle,
-                        color: Colors.white,
+                        // color: Colors.white,
                         borderRadius: BorderRadius.circular(Sizes.size10),
                         border: Border.all(
                           color: Colors.grey.shade400,

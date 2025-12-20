@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter_clone/constants/gaps.dart';
 import 'package:twitter_clone/constants/sizes.dart';
 import 'package:twitter_clone/features/authentication/password_screen.dart';
+import 'package:twitter_clone/features/main_navigation/home_screen.dart';
 import 'package:twitter_clone/features/onboarding/widgets/interest_row.dart';
 
 const musics = [
@@ -49,16 +50,25 @@ class _InterestsTwoScreenState extends State<InterestsTwoScreen> {
     return chunks;
   }
 
-  void _onNaxtTap() {
-    // print("🎉 SIGN UP COMPLETE!");
-    // MaterialPageRoute(builder: (context) => InterestsTwoScreen());
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => PasswordScreen(),
+  // void _onNaxtTap() {
+  //   // print("🎉 SIGN UP COMPLETE!");
+  //   // MaterialPageRoute(builder: (context) => InterestsTwoScreen());
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(
+  //       builder: (context) => PasswordScreen(),
 
-        // InterestsTwoScreen(email: _formData["email"]),
-      ),
+  //       // InterestsTwoScreen(email: _formData["email"]),
+  //     ),
+  //   );
+  // }
+
+  void _onNaxtTap() {
+    Navigator.of(context).pushAndRemoveUntil(
+      // MaterialPageRoute(builder: (context) => const MainNavigationScreen()),
+      MaterialPageRoute(builder: (context) => HomeScreen()),
+
+      (route) => false,
     );
   }
 
