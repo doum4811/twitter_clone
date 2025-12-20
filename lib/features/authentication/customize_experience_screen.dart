@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter_clone/constants/gaps.dart';
 import 'package:twitter_clone/constants/sizes.dart';
+import 'package:twitter_clone/utils.dart';
 
 class CustomizeExperienceScreen extends StatefulWidget {
   const CustomizeExperienceScreen({super.key});
@@ -23,6 +24,14 @@ class _CustomizeExperienceScreenState extends State<CustomizeExperienceScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final enabledBg = isDarkMode(context) ? Colors.white : Colors.black;
+    final enabledFg = isDarkMode(context) ? Colors.black : Colors.white;
+
+    final disabledBg = isDarkMode(context)
+        ? Colors.white24
+        : Colors.grey.shade400;
+    final disabledFg = isDarkMode(context) ? Colors.white38 : Colors.black38;
+
     return Scaffold(
       appBar: AppBar(
         title: const FaIcon(FontAwesomeIcons.twitter),
@@ -55,14 +64,16 @@ class _CustomizeExperienceScreenState extends State<CustomizeExperienceScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  child: const Text(
+                  child: Text(
                     "Twitter uses this data to personalize your experience. "
                     "This web browsing history will never be stored with your "
                     "name, email, or phone number.",
                     style: TextStyle(
                       fontSize: Sizes.size14 + Sizes.size1,
                       height: 1.4,
-                      color: Colors.black87,
+                      color: isDarkMode(context)
+                          ? Colors.white70
+                          : Colors.black87,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -94,7 +105,9 @@ class _CustomizeExperienceScreenState extends State<CustomizeExperienceScreen> {
                         style: TextStyle(
                           fontSize: Sizes.size14 + Sizes.size1,
                           height: 1.4,
-                          color: Colors.grey.shade800,
+                          color: isDarkMode(context)
+                              ? Colors.white60
+                              : Colors.grey.shade800,
                         ),
                       ),
                     ),
@@ -133,10 +146,11 @@ class _CustomizeExperienceScreenState extends State<CustomizeExperienceScreen> {
             height: 48,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: _trackingEnabled
-                  ? Colors
-                        .black //Theme.of(context).primaryColor
-                  : Colors.grey.shade400,
+              // color: _trackingEnabled
+              //     ? Colors
+              //           .black //Theme.of(context).primaryColor
+              //     : Colors.grey.shade400,
+              color: _trackingEnabled ? enabledBg : disabledBg,
               borderRadius: BorderRadius.circular(28),
             ),
             child: Text(
@@ -144,7 +158,8 @@ class _CustomizeExperienceScreenState extends State<CustomizeExperienceScreen> {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w800,
-                color: _trackingEnabled ? Colors.white : Colors.black38,
+                // color: _trackingEnabled ? Colors.white : Colors.black38,
+                color: _trackingEnabled ? enabledFg : disabledFg,
               ),
             ),
           ),

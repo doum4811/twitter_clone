@@ -139,6 +139,15 @@ class _HomeScreenState extends State<HomeScreen> {
       // appBar: AppBar(
       //   title: FaIcon(FontAwesomeIcons.threads, color: Colors.black),
       // ),
+      appBar: _selectedIndex == 0
+          ? AppBar(
+              title: const FaIcon(
+                FontAwesomeIcons.threads,
+                color: Colors.black,
+              ),
+            )
+          : null,
+
       body: Stack(
         children: [
           Offstage(

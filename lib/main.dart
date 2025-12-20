@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:twitter_clone/constants/sizes.dart';
+import 'package:twitter_clone/features/authentication/initial_screen.dart';
 import 'package:twitter_clone/features/main_navigation/home_screen.dart';
 
 void main() {
@@ -33,9 +34,41 @@ class TwitterApp extends StatelessWidget {
           ),
         ),
       ),
-      // home: InitialScreen(),
+      darkTheme: ThemeData(
+        useMaterial3: false,
+        // useMaterial3: true,
+        tabBarTheme: TabBarThemeData(
+          //TabBarTheme
+          labelColor: Colors.white,
+          unselectedLabelColor: Colors.grey.shade700,
+          indicatorColor: Colors.white,
+        ),
+        brightness: Brightness.dark,
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: Color(0xFFE9435A),
+        ),
+        textTheme: Typography.whiteMountainView,
+
+        scaffoldBackgroundColor: Colors.black,
+        appBarTheme: AppBarTheme(
+          surfaceTintColor: Colors.grey.shade900,
+          backgroundColor: Colors.grey.shade900,
+          foregroundColor: Colors.white,
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+            fontSize: Sizes.size16 + Sizes.size2,
+            fontWeight: FontWeight.w600,
+          ),
+          actionsIconTheme: IconThemeData(color: Colors.grey.shade100),
+          iconTheme: IconThemeData(color: Colors.grey.shade100),
+        ),
+        bottomAppBarTheme: BottomAppBarThemeData(color: Colors.grey.shade900),
+
+        primaryColor: Color(0xFFE9435A),
+      ),
+      home: InitialScreen(),
       // home: ConfirmationCodeScreen(), // 임시
-      home: HomeScreen(),
+      // home: HomeScreen(),
     );
   }
 }

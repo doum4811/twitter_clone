@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter_clone/constants/gaps.dart';
 import 'package:twitter_clone/features/authentication/password_screen.dart';
+import 'package:twitter_clone/utils.dart';
 
 class ConfirmationCodeScreen extends StatefulWidget {
   // const ConfirmationCodeScreen({super.key});
@@ -47,6 +48,14 @@ class _ConfirmationCodeScreenState extends State<ConfirmationCodeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final enabledBg = isDarkMode(context) ? Colors.white : Colors.black;
+    final enabledFg = isDarkMode(context) ? Colors.black : Colors.white;
+
+    final disabledBg = isDarkMode(context)
+        ? Colors.white24
+        : Colors.grey.shade400;
+    final disabledFg = isDarkMode(context) ? Colors.white38 : Colors.black38;
+
     return Scaffold(
       appBar: AppBar(title: FaIcon(FontAwesomeIcons.twitter)),
       body: SafeArea(
@@ -147,11 +156,12 @@ class _ConfirmationCodeScreenState extends State<ConfirmationCodeScreen> {
             height: 48,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: _isCodeComplete
-                  ? Colors
-                        .black //Theme.of(context).primaryColor
-                  : Colors.grey.shade400,
-              // color: Colors.black,
+              // color: _isCodeComplete
+              //     ? Colors
+              //           .black //Theme.of(context).primaryColor
+              //     : Colors.grey.shade400,
+              color: _isCodeComplete ? enabledBg : disabledBg,
+
               borderRadius: BorderRadius.circular(28),
             ),
             child: Text(
@@ -159,8 +169,9 @@ class _ConfirmationCodeScreenState extends State<ConfirmationCodeScreen> {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w800,
-                // color: Colors.white,
-                color: _isCodeComplete ? Colors.white : Colors.black38,
+
+                //  color: _isCodeComplete ? Colors.white : Colors.black38,
+                color: _isCodeComplete ? enabledFg : disabledFg,
               ),
             ),
           ),

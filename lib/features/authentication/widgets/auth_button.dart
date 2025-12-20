@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/src/fa_icon.dart';
 import 'package:twitter_clone/constants/sizes.dart';
+import 'package:twitter_clone/utils.dart';
 
 class AuthButton extends StatelessWidget {
   final String text;
@@ -17,7 +18,7 @@ class AuthButton extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(Sizes.size14),
         decoration: BoxDecoration(
-          color: hasIcon ? Colors.white : Colors.black,
+          color: hasIcon || isDarkMode(context) ? Colors.white : Colors.black,
           borderRadius: BorderRadius.circular(45),
           border: hasIcon
               ? Border.all(color: Colors.grey.shade300, width: Sizes.size1)
@@ -32,7 +33,9 @@ class AuthButton extends StatelessWidget {
               style: TextStyle(
                 fontSize: Sizes.size16,
                 fontWeight: FontWeight.w600,
-                color: hasIcon ? Colors.black : Colors.white,
+                color: hasIcon || isDarkMode(context)
+                    ? Colors.black
+                    : Colors.white,
               ),
               textAlign: TextAlign.center,
             ),

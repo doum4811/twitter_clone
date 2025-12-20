@@ -156,11 +156,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   ),
                 ],
 
-                // // ✅ 접혔을 때(탭 위로 올라갔을 때) 보이는 제목은 최소로
-                // title: const Text(
-                //   "Jane",
-                //   style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700),
-                // ),
                 flexibleSpace: FlexibleSpaceBar(
                   collapseMode: CollapseMode.pin,
                   background: SafeArea(

@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter_clone/constants/gaps.dart';
 import 'package:twitter_clone/constants/sizes.dart';
 import 'package:twitter_clone/features/onboarding/interests_screen.dart';
+import 'package:twitter_clone/utils.dart';
 
 class PasswordScreen extends StatefulWidget {
   const PasswordScreen({super.key});
@@ -70,6 +71,14 @@ class _PasswordScreenState extends State<PasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final enabledBg = isDarkMode(context) ? Colors.white : Colors.black;
+    final enabledFg = isDarkMode(context) ? Colors.black : Colors.white;
+
+    final disabledBg = isDarkMode(context)
+        ? Colors.white24
+        : Colors.grey.shade400;
+    final disabledFg = isDarkMode(context) ? Colors.white38 : Colors.black38;
+
     return Scaffold(
       appBar: AppBar(title: FaIcon(FontAwesomeIcons.twitter)),
       body: SafeArea(
@@ -154,11 +163,11 @@ class _PasswordScreenState extends State<PasswordScreen> {
             height: 48,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: _isPasswordValid()
-                  ? Colors
-                        .black //Theme.of(context).primaryColor
-                  : Colors.grey.shade400,
-              // color: Colors.black,
+              // color: _isPasswordValid()
+              //     ? Colors
+              //           .black //Theme.of(context).primaryColor
+              //     : Colors.grey.shade400,
+              color: _isPasswordValid() ? enabledBg : disabledBg,
               borderRadius: BorderRadius.circular(28),
             ),
             child: Text(
@@ -166,9 +175,8 @@ class _PasswordScreenState extends State<PasswordScreen> {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w800,
-                // color: Colors.white,
-                // color: _trackingEnabled ? Colors.white : Colors.black38,
-                color: _isPasswordValid() ? Colors.white : Colors.black38,
+                // color: _isPasswordValid() ? Colors.white : Colors.black38,
+                color: _isPasswordValid() ? enabledFg : disabledFg,
               ),
             ),
           ),
