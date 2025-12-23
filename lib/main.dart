@@ -28,10 +28,21 @@ class TwitterApp extends StatelessWidget {
             fontSize: Sizes.size16 + Sizes.size2,
             fontWeight: FontWeight.w600,
           ),
-          iconTheme: IconThemeData(
+          // iconTheme: IconThemeData(
+          //   size: Sizes.size32,
+          //   color: Color(0xFF4693db),
+          // ),
+          iconTheme: IconThemeData(size: Sizes.size32, color: Colors.black),
+          actionsIconTheme: IconThemeData(
             size: Sizes.size32,
-            color: Color(0xFF4693db),
+            color: Colors.black,
           ),
+        ),
+        tabBarTheme: TabBarThemeData(
+          //TabBarTheme
+          labelColor: Colors.black,
+          unselectedLabelColor: Colors.grey.shade500,
+          indicatorColor: Colors.black,
         ),
       ),
       darkTheme: ThemeData(
@@ -60,7 +71,10 @@ class TwitterApp extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
           actionsIconTheme: IconThemeData(color: Colors.grey.shade100),
-          iconTheme: IconThemeData(color: Colors.grey.shade100),
+          iconTheme: IconThemeData(
+            size: Sizes.size32,
+            color: Colors.grey.shade100,
+          ),
         ),
         bottomAppBarTheme: BottomAppBarThemeData(color: Colors.grey.shade900),
 

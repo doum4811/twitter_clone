@@ -118,7 +118,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 pinned: true,
                 floating: true, // 프로필은 보통 false가 더 자연스러움
                 snap: false, // snap은 floating이 true일 때만 의미있고, 프로필엔 굳이 X
-                backgroundColor: Colors.white,
+                // backgroundColor: Colors.white,
                 elevation: 0,
 
                 expandedHeight: 280,
@@ -127,7 +127,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   padding: const EdgeInsets.only(left: 16),
                   child: Icon(
                     FontAwesomeIcons.globe,
-                    color: Colors.black,
+                    // color: Colors.black,
                     size: Sizes.size20, // 20,
                   ),
                 ),
@@ -136,7 +136,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     onPressed: () {},
                     icon: Icon(
                       FontAwesomeIcons.instagram,
-                      color: Colors.black,
+                      // color: Colors.black,
                       size: 20,
                     ),
                   ),
@@ -149,7 +149,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       onPressed: _onBarPressed,
                       icon: Icon(
                         FontAwesomeIcons.bars,
-                        color: Colors.black,
+                        // color: Colors.black,
                         size: 20,
                       ),
                     ),
@@ -178,7 +178,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                       style: TextStyle(
                                         fontSize: 34,
                                         fontWeight: FontWeight.w800,
-                                        color: Colors.black,
+                                        // color: Colors.black,
                                       ),
                                     ),
                                     const SizedBox(height: 8),
@@ -188,7 +188,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                           "jane_mobbin",
                                           style: TextStyle(
                                             fontSize: 18,
-                                            color: Colors.black,
+                                            // color: Colors.black,
                                           ),
                                         ),
                                         const SizedBox(width: 10),
@@ -217,7 +217,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                       "Plant enthusiast!",
                                       style: TextStyle(
                                         fontSize: 18,
-                                        color: Colors.black,
+                                        // color: Colors.black,
                                       ),
                                     ),
                                   ],
@@ -243,7 +243,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                               const Text(
                                 "2 followers",
                                 style: TextStyle(
-                                  color: Colors.black54,
+                                  // color: Colors.black54,
                                   fontSize: 16,
                                 ),
                               ),

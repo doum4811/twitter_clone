@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter_clone/constants/sizes.dart';
+import 'package:twitter_clone/utils.dart';
 
 class PrivacyScreen extends StatefulWidget {
   const PrivacyScreen({super.key});
@@ -21,27 +22,34 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.white,
         elevation: 0.5,
         leadingWidth: 100,
         leading: TextButton.icon(
           onPressed: () => Navigator.of(context).pop(),
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back_ios_new,
             size: 18,
-            color: Colors.black,
+            color: isDark ? Colors.white : Colors.black,
           ),
-          label: const Text(
+          label: Text(
             "Back",
-            style: TextStyle(fontSize: Sizes.size18, color: Colors.black),
+            style: TextStyle(
+              fontSize: Sizes.size18,
+              color: isDark ? Colors.white : Colors.black,
+            ),
           ),
         ),
         title: const Text(
           "Privacy",
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800),
+          style: TextStyle(
+            //color: Colors.black,
+            fontWeight: FontWeight.w800,
+          ),
         ),
         centerTitle: true,
       ),
@@ -52,7 +60,9 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
             onChanged:
                 _privateProfileChanged, //(value) => setState(() => _privateProfile = value),
             // secondary: const Icon(Icons.lock_outline),
-            secondary: const FaIcon(FontAwesomeIcons.lock, color: Colors.black),
+            secondary: const FaIcon(
+              FontAwesomeIcons.lock,
+            ), // color: Colors.black),
 
             title: const Text(
               "Private profile",
@@ -63,7 +73,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
           ),
           ListTile(
             // leading: const Icon(Icons.alternate_email),
-            leading: const FaIcon(FontAwesomeIcons.at, color: Colors.black),
+            leading: const FaIcon(FontAwesomeIcons.at), //color: Colors.black),
 
             title: const Text("Mentions", style: TextStyle(fontSize: 20)),
             trailing: Row(
@@ -83,7 +93,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
             // leading: const Icon(Icons.notifications_off_outlined),
             leading: const FaIcon(
               FontAwesomeIcons.bellSlash,
-              color: Colors.black,
+              //color: Colors.black,
             ),
 
             title: const Text("Muted", style: TextStyle(fontSize: 20)),
@@ -94,7 +104,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
             // leading: const Icon(Icons.visibility_off_outlined),
             leading: const FaIcon(
               FontAwesomeIcons.eyeSlash,
-              color: Colors.black,
+              // color: Colors.black,
             ),
             title: const Text("Hidden Words", style: TextStyle(fontSize: 20)),
             trailing: Icon(Icons.chevron_right, color: Colors.grey.shade500),
@@ -105,7 +115,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
             // leading: const Icon(Icons.group_outlined),
             leading: const FaIcon(
               FontAwesomeIcons.userGroup,
-              color: Colors.black,
+              //color: Colors.black,
             ),
             title: const Text(
               "Profiles you follow",
@@ -139,7 +149,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
             // leading: const Icon(Icons.block),
             leading: const FaIcon(
               FontAwesomeIcons.circleXmark,
-              color: Colors.black,
+              // color: Colors.black,
             ),
             title: const Text(
               "Blocked profiles",
@@ -155,7 +165,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
             // ),
             leading: const FaIcon(
               FontAwesomeIcons.heartCrack,
-              color: Colors.black,
+              // color: Colors.black,
             ),
             title: const Text("Hide likes", style: TextStyle(fontSize: 20)),
             trailing: Icon(Icons.open_in_new, color: Colors.grey.shade500),

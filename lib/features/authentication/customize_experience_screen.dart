@@ -24,17 +24,19 @@ class _CustomizeExperienceScreenState extends State<CustomizeExperienceScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final enabledBg = isDarkMode(context) ? Colors.white : Colors.black;
-    final enabledFg = isDarkMode(context) ? Colors.black : Colors.white;
+    final isDark = isDarkMode(context);
+    final enabledBg = isDark ? Colors.white : Colors.black;
+    final enabledFg = isDark ? Colors.black : Colors.white;
 
-    final disabledBg = isDarkMode(context)
-        ? Colors.white24
-        : Colors.grey.shade400;
-    final disabledFg = isDarkMode(context) ? Colors.white38 : Colors.black38;
+    final disabledBg = isDark ? Colors.white24 : Colors.grey.shade400;
+    final disabledFg = isDark ? Colors.white38 : Colors.black38;
 
     return Scaffold(
       appBar: AppBar(
-        title: const FaIcon(FontAwesomeIcons.twitter),
+        title: FaIcon(
+          FontAwesomeIcons.twitter,
+          color: isDark ? Colors.white : Color(0xFF4693db),
+        ),
         centerTitle: true,
       ),
       body: Padding(

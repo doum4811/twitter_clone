@@ -8,6 +8,7 @@ import 'package:twitter_clone/features/main_navigation/widgets/stf_screen.dart';
 import 'package:twitter_clone/features/main_navigation/write_screen.dart';
 import 'package:twitter_clone/features/searching/search_screen.dart';
 import 'package:twitter_clone/features/user/user_profile_screen.dart';
+import 'package:twitter_clone/utils.dart';
 
 // 테스트용 더미 데이터
 const dummyPosts = [
@@ -135,15 +136,16 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     print('im bulit!');
+    final isDark = isDarkMode(context);
     return Scaffold(
       // appBar: AppBar(
       //   title: FaIcon(FontAwesomeIcons.threads, color: Colors.black),
       // ),
       appBar: _selectedIndex == 0
           ? AppBar(
-              title: const FaIcon(
+              title: FaIcon(
                 FontAwesomeIcons.threads,
-                color: Colors.black,
+                // color: isDark ? Colors.white : Colors.black,
               ),
             )
           : null,

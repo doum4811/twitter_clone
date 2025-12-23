@@ -4,6 +4,7 @@ import 'package:twitter_clone/constants/gaps.dart';
 import 'package:twitter_clone/constants/sizes.dart';
 import 'package:twitter_clone/features/onboarding/interests_two_screen.dart';
 import 'package:twitter_clone/features/onboarding/widgets/interest_box.dart';
+import 'package:twitter_clone/utils.dart';
 
 const interests = [
   "Fashion & beauty",
@@ -63,8 +64,14 @@ class _InterestsScreenState extends State<InterestsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     return Scaffold(
-      appBar: AppBar(title: FaIcon(FontAwesomeIcons.twitter)),
+      appBar: AppBar(
+        title: FaIcon(
+          FontAwesomeIcons.twitter,
+          color: isDark ? Colors.white : const Color(0xFF4693db),
+        ),
+      ),
       body: Scrollbar(
         child: SingleChildScrollView(
           child: Padding(

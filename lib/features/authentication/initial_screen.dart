@@ -4,6 +4,7 @@ import 'package:twitter_clone/constants/gaps.dart';
 import 'package:twitter_clone/constants/sizes.dart';
 import 'package:twitter_clone/features/authentication/create_account_screen.dart';
 import 'package:twitter_clone/features/authentication/widgets/auth_button.dart';
+import 'package:twitter_clone/utils.dart';
 
 class InitialScreen extends StatelessWidget {
   const InitialScreen({super.key});
@@ -16,8 +17,14 @@ class InitialScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     return Scaffold(
-      appBar: AppBar(title: FaIcon(FontAwesomeIcons.twitter)),
+      appBar: AppBar(
+        title: FaIcon(
+          FontAwesomeIcons.twitter,
+          color: isDark ? Colors.white : const Color(0xFF4693db),
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: Sizes.size40),

@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter_clone/constants/sizes.dart';
 import 'package:twitter_clone/features/user/privacy_screen.dart';
+import 'package:twitter_clone/utils.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -77,27 +78,34 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.white,
         elevation: 0.5,
         leadingWidth: 100,
         leading: TextButton.icon(
           onPressed: () => Navigator.of(context).pop(),
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back_ios_new,
             size: 18,
-            color: Colors.black,
+            color: isDark ? Colors.white : Colors.black,
           ),
-          label: const Text(
+          label: Text(
             "Back",
-            style: TextStyle(fontSize: Sizes.size18, color: Colors.black),
+            style: TextStyle(
+              fontSize: Sizes.size18,
+              color: isDark ? Colors.white : Colors.black,
+            ),
           ),
         ),
         title: const Text(
           "Settings",
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800),
+          style: TextStyle(
+            //color: Colors.black,
+            fontWeight: FontWeight.w800,
+          ),
         ),
         centerTitle: true,
       ),
@@ -107,7 +115,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             // leading: const Icon(Icons.person_add_alt_1_outlined),
             leading: const FaIcon(
               FontAwesomeIcons.userPlus,
-              color: Colors.black,
+              // color: Colors.black,
             ),
             title: const Text(
               "Follow and invite friends",
@@ -117,13 +125,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           ListTile(
             // leading: const Icon(Icons.notifications_none),
-            leading: const FaIcon(FontAwesomeIcons.bell, color: Colors.black),
+            leading: const FaIcon(
+              FontAwesomeIcons.bell,
+            ), // color: Colors.black),
             title: const Text("Notifications", style: TextStyle(fontSize: 20)),
             onTap: () {},
           ),
           ListTile(
             // leading: const Icon(Icons.lock_outline, color: Colors.black),
-            leading: const FaIcon(FontAwesomeIcons.lock, color: Colors.black),
+            leading: const FaIcon(
+              FontAwesomeIcons.lock,
+            ), //color: Colors.black),
             title: const Text("Privacy", style: TextStyle(fontSize: 20)),
             onTap: _goPrivacy,
           ),
@@ -131,7 +143,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             // leading: const Icon(Icons.account_circle_outlined),
             leading: const FaIcon(
               FontAwesomeIcons.circleUser,
-              color: Colors.black,
+              //color: Colors.black,
             ),
             title: const Text("Account", style: TextStyle(fontSize: 20)),
             onTap: () {},
@@ -140,13 +152,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             // leading: const Icon(Icons.help_outline),
             leading: const FaIcon(
               FontAwesomeIcons.lifeRing,
-              color: Colors.black,
+              // color: Colors.black,
             ),
             title: const Text("Help", style: TextStyle(fontSize: 20)),
             onTap: () {},
           ),
           ListTile(
-            leading: const Icon(Icons.info_outline, color: Colors.black),
+            leading: const Icon(Icons.info_outline), // color: Colors.black),
             // leading: const FaIcon(FontAwesomeIcons.circleInfo),
             title: const Text("About", style: TextStyle(fontSize: 20)),
             onTap: () {},

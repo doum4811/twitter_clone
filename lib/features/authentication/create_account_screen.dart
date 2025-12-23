@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:twitter_clone/features/authentication/confirmation_code_screen.dart';
 import 'package:twitter_clone/features/authentication/customize_experience_screen.dart';
 import 'package:twitter_clone/features/authentication/widgets/form_button.dart';
+import 'package:twitter_clone/utils.dart';
 
 class CreateAccountScreen extends StatefulWidget {
   const CreateAccountScreen({super.key});
@@ -141,8 +142,14 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     return Scaffold(
-      appBar: AppBar(title: FaIcon(FontAwesomeIcons.twitter)),
+      appBar: AppBar(
+        title: FaIcon(
+          FontAwesomeIcons.twitter,
+          color: isDark ? Colors.white : const Color(0xFF4693db),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: Sizes.size36),
         child: Column(

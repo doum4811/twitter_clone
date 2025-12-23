@@ -10,14 +10,14 @@ class ThreadsTabBar extends SliverPersistentHeaderDelegate {
     bool overlapsContent,
   ) {
     return Container(
-      color: Colors.white,
+      // color: Colors.white,
       child: Column(
         children: [
           TabBar(
             isScrollable: false,
             indicatorSize: TabBarIndicatorSize.tab,
-            indicatorColor: Colors.black,
-            labelColor: Colors.black,
+            // indicatorColor: Colors.black,
+            // labelColor: Colors.black,
             unselectedLabelColor: Colors.grey.shade400,
             labelStyle: const TextStyle(fontWeight: FontWeight.w700),
             unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w700),
