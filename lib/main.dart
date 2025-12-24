@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:twitter_clone/constants/sizes.dart';
 import 'package:twitter_clone/features/authentication/initial_screen.dart';
 import 'package:twitter_clone/features/main_navigation/home_screen.dart';
+import 'package:twitter_clone/router.dart';
 
 void main() {
   runApp(const TwitterApp());
@@ -12,7 +13,8 @@ class TwitterApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       title: 'Twitter Clone',
       theme: ThemeData(
         useMaterial3: false,
@@ -80,9 +82,6 @@ class TwitterApp extends StatelessWidget {
 
         primaryColor: Color(0xFFE9435A),
       ),
-      // home: InitialScreen(),
-      // home: ConfirmationCodeScreen(), // 임시
-      home: HomeScreen(),
     );
   }
 }

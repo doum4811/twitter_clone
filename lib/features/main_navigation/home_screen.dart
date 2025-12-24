@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:twitter_clone/constants/sizes.dart';
 import 'package:twitter_clone/features/activity/activity_screen.dart';
 import 'package:twitter_clone/features/main_navigation/widgets/nav_tab.dart';
@@ -98,6 +99,8 @@ const dummyPosts = [
 ];
 
 class HomeScreen extends StatefulWidget {
+  static String routeURL = "/";
+  static String routeName = "homeScreen";
   const HomeScreen({super.key});
 
   @override
@@ -105,9 +108,32 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 4;
+  int _selectedIndex = 0;
 
   void _onTap(int index) {
+    if (index == 0) {
+      context.pushNamed(HomeScreen.routeName);
+      // context.go(HomeScreen.routeName);
+
+      return;
+    } else if (index == 1) {
+      context.pushNamed(SearchScreen.routeName);
+      // context.go(SearchScreen.routeName);
+      return;
+    } else if (index == 3) {
+      context.pushNamed(ActivityScreen.routeName);
+      // context.go(ActivityScreen.routeName);
+
+      return;
+    } else if (index == 4) {
+      context.pushNamed(
+        UserProfileScreen.routeName,
+        params: {"username": "니꼬"},
+      );
+      // context.go(UserProfileScreen.routeName);
+
+      return;
+    }
     setState(() {
       _selectedIndex = index;
     });
@@ -171,9 +197,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
           Offstage(offstage: _selectedIndex != 2, child: StfScreen()),
           Offstage(offstage: _selectedIndex != 3, child: ActivityScreen()),
-          Offstage(offstage: _selectedIndex != 4, child: UserProfileScreen()),
+          // Offstage(offstage: _selectedIndex != 4, child: UserProfileScreen()),
+          Offstage(
+            offstage: _selectedIndex != 4,
+            child: UserProfileScreen(username: "Jane"), //, tab: "Replies"),
+          ),
         ],
       ),
+
       bottomNavigationBar: BottomAppBar(
         // color: Colors.white,
         child: Padding(

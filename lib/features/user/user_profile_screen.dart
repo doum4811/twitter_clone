@@ -1,13 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:twitter_clone/constants/gaps.dart';
 import 'package:twitter_clone/constants/sizes.dart';
 import 'package:twitter_clone/features/user/settings_screen.dart';
 import 'package:twitter_clone/features/user/widgets/threads_tab_bar.dart';
 
 class UserProfileScreen extends StatefulWidget {
-  const UserProfileScreen({super.key});
+  static String routeURL = "profile";
+  static String routeName = "profile";
+
+  final String username;
+  final String tab = "Replies";
+  const UserProfileScreen({
+    super.key,
+    required this.username,
+    // required this.tab,
+  });
 
   @override
   State<UserProfileScreen> createState() => _UserProfileScreenState();
@@ -101,15 +111,19 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   ];
 
   void _onBarPressed() {
-    Navigator.of(
-      context,
-    ).push(MaterialPageRoute(builder: (context) => SettingsScreen()));
+    // Navigator.of(
+    //   context,
+    // ).push(MaterialPageRoute(builder: (context) => SettingsScreen()));
+    context.pushNamed(SettingsScreen.routeName);
   }
 
   @override
   Widget build(BuildContext context) {
+    print("widget.tab: ${widget.tab}");
     return SafeArea(
       child: DefaultTabController(
+        // initialIndex: widget.tab == "Replies" ? 0 : 1,
+        initialIndex: 1,
         length: 2,
         child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScorlled) {

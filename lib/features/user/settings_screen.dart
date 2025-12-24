@@ -10,11 +10,14 @@
 // }
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:twitter_clone/constants/sizes.dart';
 import 'package:twitter_clone/features/user/privacy_screen.dart';
 import 'package:twitter_clone/utils.dart';
 
 class SettingsScreen extends StatefulWidget {
+  static String routeURL = "settings";
+  static String routeName = "settings";
   const SettingsScreen({super.key});
 
   @override
@@ -23,9 +26,10 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   void _goPrivacy() {
-    Navigator.of(
-      context,
-    ).push(MaterialPageRoute(builder: (_) => const PrivacyScreen()));
+    // Navigator.of(
+    //   context,
+    // ).push(MaterialPageRoute(builder: (_) => const PrivacyScreen()));
+    context.pushNamed(PrivacyScreen.routeName);
   }
 
   void _showLogoutDialog() {

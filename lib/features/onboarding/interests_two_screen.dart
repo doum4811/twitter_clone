@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:twitter_clone/constants/gaps.dart';
 import 'package:twitter_clone/constants/sizes.dart';
 import 'package:twitter_clone/features/authentication/password_screen.dart';
@@ -65,12 +66,13 @@ class _InterestsTwoScreenState extends State<InterestsTwoScreen> {
   // }
 
   void _onNaxtTap() {
-    Navigator.of(context).pushAndRemoveUntil(
-      // MaterialPageRoute(builder: (context) => const MainNavigationScreen()),
-      MaterialPageRoute(builder: (context) => HomeScreen()),
+    // Navigator.of(context).pushAndRemoveUntil(
+    //   // MaterialPageRoute(builder: (context) => const MainNavigationScreen()),
+    //   MaterialPageRoute(builder: (context) => HomeScreen()),
 
-      (route) => false,
-    );
+    //   (route) => false,
+    // );
+    context.pushNamed(HomeScreen.routeName);
   }
 
   @override

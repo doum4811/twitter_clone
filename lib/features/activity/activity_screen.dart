@@ -4,6 +4,8 @@ import 'package:twitter_clone/constants/gaps.dart';
 import 'package:twitter_clone/constants/sizes.dart';
 
 class ActivityScreen extends StatefulWidget {
+  static String routeURL = "activity";
+  static String routeName = "activity";
   const ActivityScreen({super.key});
 
   @override
