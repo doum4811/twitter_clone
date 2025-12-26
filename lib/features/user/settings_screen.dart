@@ -1,36 +1,25 @@
-// import 'package:flutter/cupertino.dart';
-
-// class SettingsScreen extends StatelessWidget {
-//   const SettingsScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Placeholder();
-//   }
-// }
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 import 'package:twitter_clone/constants/sizes.dart';
 import 'package:twitter_clone/features/user/privacy_screen.dart';
-import 'package:twitter_clone/features/user/view_models/theme_view_model.dart';
+import 'package:twitter_clone/features/user/view_models/theme_notifier.dart';
+// import 'package:twitter_clone/features/user/view_models/theme_view_model.dart';
 import 'package:twitter_clone/utils.dart';
 
-class SettingsScreen extends StatefulWidget {
+class SettingsScreen extends ConsumerStatefulWidget {
   static String routeURL = "settings";
   static String routeName = "settings";
   const SettingsScreen({super.key});
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
+  ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   void _goPrivacy() {
-    // Navigator.of(
-    //   context,
-    // ).push(MaterialPageRoute(builder: (_) => const PrivacyScreen()));
     context.pushNamed(PrivacyScreen.routeName);
   }
 
@@ -85,7 +74,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final isDark = isDarkMode(context);
-    final themeVM = context.watch<ThemeViewModel>();
+    final themeState = ref.watch(themeProvider);
     return Scaffold(
       // backgroundColor: Colors.white,
       appBar: AppBar(
@@ -180,8 +169,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           SwitchListTile(
             title: const Text("Dark Mode"),
-            value: themeVM.isDarkMode,
-            onChanged: themeVM.setDarkMode,
+            value: themeState.isDark,
+            onChanged: (value) {
+              ref.read(themeProvider.notifier).setDarkMode(value);
+            },
           ),
         ],
       ),
