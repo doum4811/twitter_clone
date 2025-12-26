@@ -11,8 +11,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter_clone/constants/sizes.dart';
 import 'package:twitter_clone/features/user/privacy_screen.dart';
+import 'package:twitter_clone/features/user/view_models/theme_view_model.dart';
 import 'package:twitter_clone/utils.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -83,6 +85,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final isDark = isDarkMode(context);
+    final themeVM = context.watch<ThemeViewModel>();
     return Scaffold(
       // backgroundColor: Colors.white,
       appBar: AppBar(
@@ -174,6 +177,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
               style: TextStyle(color: Colors.blue, fontSize: 20),
             ),
             onTap: _showLogoutDialog,
+          ),
+          SwitchListTile(
+            title: const Text("Dark Mode"),
+            value: themeVM.isDarkMode,
+            onChanged: themeVM.setDarkMode,
           ),
         ],
       ),

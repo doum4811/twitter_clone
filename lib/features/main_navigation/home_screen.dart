@@ -126,10 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
       return;
     } else if (index == 4) {
-      context.pushNamed(
-        UserProfileScreen.routeName,
-        params: {"username": "니꼬"},
-      );
+      context.goNamed(UserProfileScreen.routeName, params: {"username": "니꼬"});
       // context.go(UserProfileScreen.routeName);
 
       return;

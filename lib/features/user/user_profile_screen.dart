@@ -12,7 +12,7 @@ class UserProfileScreen extends StatefulWidget {
   static String routeName = "profile";
 
   final String username;
-  final String tab = "Replies";
+  final String tab = "replies";
   const UserProfileScreen({
     super.key,
     required this.username,
