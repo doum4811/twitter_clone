@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 bool isDarkMode(BuildContext context) =>
-    MediaQuery.of(context).platformBrightness == Brightness.dark;
+    Theme.of(context).brightness == Brightness.dark;

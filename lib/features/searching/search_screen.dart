@@ -37,7 +37,7 @@ final List<Map<String, dynamic>> dummyUsers = [
 ];
 
 class SearchScreen extends StatefulWidget {
-  static String routeURL = "search";
+  static String routeURL = "/search";
   static String routeName = "search";
   const SearchScreen({super.key});
 

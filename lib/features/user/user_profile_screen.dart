@@ -8,7 +8,7 @@ import 'package:twitter_clone/features/user/settings_screen.dart';
 import 'package:twitter_clone/features/user/widgets/threads_tab_bar.dart';
 
 class UserProfileScreen extends StatefulWidget {
-  static String routeURL = "profile";
+  static String routeURL = "/profile";
   static String routeName = "profile";
 
   final String username;

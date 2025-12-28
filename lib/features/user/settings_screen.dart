@@ -10,7 +10,7 @@ import 'package:twitter_clone/features/user/view_models/theme_notifier.dart';
 import 'package:twitter_clone/utils.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
-  static String routeURL = "settings";
+  static String routeURL = "/settings";
   static String routeName = "settings";
   const SettingsScreen({super.key});
 
